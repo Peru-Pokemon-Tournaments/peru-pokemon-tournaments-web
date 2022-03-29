@@ -1,0 +1,23 @@
+export class Person {
+  constructor(
+    private _id: string,
+    private _firstName: string,
+    private _lastName: string
+  ) {}
+
+  public get id(): string {
+    return this._id;
+  }
+
+  public get firstName(): string {
+    return this._firstName;
+  }
+
+  public get lastName(): string {
+    return this._lastName;
+  }
+
+  public static fromJson(json: any): Person {
+    return new Person(json["id"], json["first_name"], json["last_name"]);
+  }
+}
