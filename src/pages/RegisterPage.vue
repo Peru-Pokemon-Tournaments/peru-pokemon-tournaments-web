@@ -6,6 +6,10 @@
         <the-title> Registro </the-title>
       </template>
       <form @submit.prevent="submit">
+        <the-label> Nombres </the-label>
+        <the-input v-model="firstName" type="text" />
+        <the-label> Apellidos </the-label>
+        <the-input v-model="lastName" type="text" />
         <the-label> Nombre de usuario </the-label>
         <the-input v-model="username" type="text" />
         <the-label> Correo electrónico </the-label>
@@ -24,6 +28,8 @@
 
 <script lang="ts">
 import { defineComponent } from "@vue/runtime-core";
+import { mapActions, mapState } from "pinia";
+import { useUserStore } from "@/stores/user";
 import TheButton from "@/components/ui/buttons/TheButton.vue";
 import TheCenteredLayout from "@/components/layouts/TheCenteredLayout.vue";
 import TheCard from "@/components/ui/TheCard.vue";
@@ -44,20 +50,44 @@ export default defineComponent({
   },
   data() {
     return {
+      firstName: "",
+      lastName: "",
       username: "",
       email: "",
       password: "",
       repeatedPassword: "",
     };
   },
-  methods: {
-    submit(): void {
-      console.log(this.username);
-    },
-  },
   computed: {
+    ...mapState(useUserStore, ["isRegisterUserSuccessfully"]),
     logoImageAsset() {
       return require("@/assets/img/logo.png");
+    },
+  },
+  methods: {
+    ...mapActions(useUserStore, ["registerUser"]),
+    async submit(): Promise<void> {
+      await this.registerUser({
+        firstName: this.firstName,
+        lastName: this.lastName,
+        name: this.username,
+        email: this.email,
+        password: this.password,
+        repeatedPassword: this.repeatedPassword,
+      });
+    },
+    clearForm(): void {
+      this.firstName = "";
+      this.lastName = "";
+      this.username = "";
+      this.email = "";
+      this.password = "";
+      this.repeatedPassword = "";
+    },
+  },
+  watch: {
+    isRegisterUserSuccessfully() {
+      this.clearForm();
     },
   },
 });
