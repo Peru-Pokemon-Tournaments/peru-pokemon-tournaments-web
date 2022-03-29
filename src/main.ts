@@ -1,11 +1,24 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
-import AppRouter from "./routes/router";
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
+
 import App from "./App.vue";
+import AppRouter from "./routes/router";
+import ServiceProvider from "./config/providers.config";
 
 const app = createApp(App);
 
-app.use(createPinia());
+const pinia = createPinia();
+
+pinia.use(() => {
+  return {
+    ...ServiceProvider,
+  };
+});
+
+app.use(pinia);
+app.use(Toast);
 app.use(AppRouter);
 
 app.mount("#app");
