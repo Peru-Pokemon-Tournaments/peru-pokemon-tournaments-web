@@ -1,10 +1,11 @@
-import axios, { AxiosError, AxiosInstance } from "axios";
+import { AxiosError, AxiosInstance } from "axios";
 import {
   REGISTER_USER_URI,
   LOGIN_URI,
   API_DOMAIN,
 } from "@/config/services-uri.config";
 import { ResponseError } from "./interfaces/reponse-error";
+import { User } from "@/models/user.model";
 
 export interface AuthService {
   registerUser({
@@ -20,7 +21,10 @@ export interface AuthService {
     email: string;
     password: string;
   }): Promise<string>;
-  login(email: string, password: string): Promise<string>;
+  login(
+    email: string,
+    password: string
+  ): Promise<{ user: User; token: string; message: string }>;
 }
 
 export class ApiAuthService implements AuthService {
@@ -60,12 +64,24 @@ export class ApiAuthService implements AuthService {
     }
   }
 
-  async login(email: string, password: string): Promise<string> {
-    const response = await this._httpClient.post(API_DOMAIN + LOGIN_URI, {
-      email,
-      password,
-    });
-
-    return response.data["message"];
+  async login(
+    email: string,
+    password: string
+  ): Promise<{ user: User; token: string; message: string }> {
+    try {
+      const response = await this._httpClient.post(API_DOMAIN + LOGIN_URI, {
+        email,
+        password,
+      });
+      return {
+        user: User.fromJson(response?.data?.data?.user),
+        token: response?.data?.data?.token as string,
+        message: response?.data?.data?.message as string,
+      };
+    } catch (error: any | Error | AxiosError) {
+      throw new ResponseError(error.response.data.message, {
+        fields: [error.response.data.message],
+      });
+    }
   }
 }
