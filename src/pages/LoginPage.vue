@@ -3,7 +3,7 @@
     <base-card id="card">
       <template v-slot:header>
         <base-picture id="logo" :src="logoImageAsset" height="150" />
-        <the-title> Ingresar </the-title>
+        <base-title> Ingresar </base-title>
       </template>
       <form @submit.prevent="submit">
         <base-label> Correo electrónico </base-label>
@@ -29,7 +29,7 @@ import BaseCard from "@/components/ui/cards/BaseCard.vue";
 import BaseLabel from "@/components/ui/semantics/BaseLabel.vue";
 import BasePicture from "@/components/ui/images/BasePicture.vue";
 import BaseInput from "@/components/ui/inputs/BaseInput.vue";
-import TheTitle from "@/components/ui/semantics/TheTitle.vue";
+import BaseTitle from "@/components/ui/semantics/BaseTitle.vue";
 
 export default defineComponent({
   components: {
@@ -39,7 +39,7 @@ export default defineComponent({
     BaseLabel,
     BasePicture,
     BaseInput,
-    TheTitle,
+    BaseTitle,
   },
   data() {
     return {
