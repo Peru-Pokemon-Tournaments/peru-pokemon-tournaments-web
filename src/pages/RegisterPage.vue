@@ -33,7 +33,7 @@ import { useUserStore } from "@/stores/user";
 import BaseButton from "@/components/ui/buttons/BaseButton.vue";
 import TheCenteredLayout from "@/components/layouts/TheCenteredLayout.vue";
 import BaseCard from "@/components/ui/cards/BaseCard.vue";
-import TheLabel from "@/components/ui/semantics/TheLabel.vue";
+import BaseLabel from "@/components/ui/semantics/BaseLabel.vue";
 import BasePicture from "@/components/ui/images/BasePicture.vue";
 import BaseInput from "@/components/ui/inputs/BaseInput.vue";
 import BaseTitle from "@/components/ui/semantics/BaseTitle.vue";
@@ -43,7 +43,7 @@ export default defineComponent({
     BaseButton,
     BaseCard,
     TheCenteredLayout,
-    TheLabel,
+    BaseLabel,
     BasePicture,
     BaseInput,
     BaseTitle,
