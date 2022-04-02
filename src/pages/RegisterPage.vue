@@ -6,17 +6,17 @@
         <the-title> Registro </the-title>
       </template>
       <form @submit.prevent="submit">
-        <the-label> Nombres </the-label>
+        <base-label> Nombres </base-label>
         <base-input v-model="firstName" type="text" />
-        <the-label> Apellidos </the-label>
+        <base-label> Apellidos </base-label>
         <base-input v-model="lastName" type="text" />
-        <the-label> Nombre de usuario </the-label>
+        <base-label> Nombre de usuario </base-label>
         <base-input v-model="username" type="text" />
-        <the-label> Correo electrónico </the-label>
+        <base-label> Correo electrónico </base-label>
         <base-input v-model="email" type="email" />
-        <the-label> Contraseña </the-label>
+        <base-label> Contraseña </base-label>
         <base-input v-model="password" type="password" />
-        <the-label> Repetir contraseña </the-label>
+        <base-label> Repetir contraseña </base-label>
         <base-input v-model="repeatedPassword" type="password" />
         <footer>
           <base-button> Enviar </base-button>
