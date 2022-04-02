@@ -66,7 +66,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import TheCard from "@/components/ui/TheCard.vue";
+import TheCard from "@/components/ui/cards/TheCard.vue";
 import TheButton from "@/components/ui/buttons/TheButton.vue";
 import { Tournament } from "@/models/tournament.model";
 

@@ -25,7 +25,7 @@ import { mapActions, mapState } from "pinia";
 import { useUserStore } from "@/stores/user";
 import TheButton from "@/components/ui/buttons/TheButton.vue";
 import TheCenteredLayout from "@/components/layouts/TheCenteredLayout.vue";
-import TheCard from "@/components/ui/TheCard.vue";
+import TheCard from "@/components/ui/cards/TheCard.vue";
 import TheLabel from "@/components/ui/semantics/TheLabel.vue";
 import ThePicture from "@/components/ui/images/ThePicture.vue";
 import TheInput from "@/components/ui/inputs/TheInput.vue";

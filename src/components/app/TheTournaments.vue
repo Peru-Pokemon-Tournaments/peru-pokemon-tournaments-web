@@ -10,7 +10,7 @@ import { mapActions, mapState } from "pinia";
 import { defineComponent } from "vue";
 import { useUserStore } from "@/stores/user/index";
 import { useTournamentStore } from "@/stores/tournament/index";
-import TheTournamentCard from "@/components/ui/TheTournamentCard.vue";
+import TheTournamentCard from "@/components/ui/cards/TheTournamentCard.vue";
 
 export default defineComponent({
   components: {
