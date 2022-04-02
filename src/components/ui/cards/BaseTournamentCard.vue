@@ -66,15 +66,9 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import BaseCard from "@/components/ui/cards/BaseCard.vue";
-import BaseButton from "@/components/ui/buttons/BaseButton.vue";
 import { Tournament } from "@/models/tournament.model";
 
 export default defineComponent({
-  components: {
-    BaseButton,
-    BaseCard,
-  },
   props: {
     tournament: {
       type: Object as PropType<Tournament>,

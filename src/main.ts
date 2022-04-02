@@ -7,6 +7,7 @@ import "datejs";
 import App from "./App.vue";
 import AppRouter from "./routes/router";
 import ServiceProvider from "./config/providers.config";
+import { addComponents } from "./config/global-components.config";
 
 const app = createApp(App);
 
@@ -17,6 +18,8 @@ pinia.use(() => {
     ...ServiceProvider,
   };
 });
+
+addComponents(app);
 
 app.use(pinia);
 app.use(Toast);
