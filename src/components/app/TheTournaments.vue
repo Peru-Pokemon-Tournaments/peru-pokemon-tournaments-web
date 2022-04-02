@@ -1,7 +1,7 @@
 <template>
   <ul id="tournaments">
     <li v-for="tournament in allTournaments" :key="tournament.id">
-      <the-tournament-card :tournament="tournament" />
+      <base-tournament-card :tournament="tournament" />
     </li>
   </ul>
 </template>
@@ -10,11 +10,11 @@ import { mapActions, mapState } from "pinia";
 import { defineComponent } from "vue";
 import { useUserStore } from "@/stores/user/index";
 import { useTournamentStore } from "@/stores/tournament/index";
-import TheTournamentCard from "@/components/ui/cards/TheTournamentCard.vue";
+import BaseTournamentCard from "@/components/ui/cards/BaseTournamentCard.vue";
 
 export default defineComponent({
   components: {
-    TheTournamentCard,
+    BaseTournamentCard,
   },
   computed: {
     ...mapState(useTournamentStore, ["allTournaments"]),
