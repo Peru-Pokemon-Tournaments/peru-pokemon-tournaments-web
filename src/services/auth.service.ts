@@ -55,7 +55,7 @@ export class ApiAuthService implements AuthService {
         }
       );
 
-      return payload?.data?.data?.message as string;
+      return payload?.data?.message as string;
     } catch (error: any | Error | AxiosError) {
       throw new ResponseError(
         error.response.data.message,
@@ -74,9 +74,9 @@ export class ApiAuthService implements AuthService {
         password,
       });
       return {
-        user: User.fromJson(response?.data?.data?.user),
-        token: response?.data?.data?.token as string,
-        message: response?.data?.data?.message as string,
+        user: User.fromJson(response?.data?.user),
+        token: response?.data?.token as string,
+        message: response?.data?.message as string,
       };
     } catch (error: any | Error | AxiosError) {
       throw new ResponseError(error.response.data.message, {
