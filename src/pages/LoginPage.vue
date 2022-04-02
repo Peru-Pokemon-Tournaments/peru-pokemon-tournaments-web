@@ -11,7 +11,7 @@
         <the-label> Contraseña </the-label>
         <the-input v-model="password" type="password" />
         <footer>
-          <the-button> Iniciar sesión </the-button>
+          <base-button> Iniciar sesión </base-button>
           <router-link to="/register">Registrarse</router-link>
         </footer>
       </form>
@@ -23,7 +23,7 @@
 import { defineComponent } from "@vue/runtime-core";
 import { mapActions, mapState } from "pinia";
 import { useUserStore } from "@/stores/user";
-import TheButton from "@/components/ui/buttons/TheButton.vue";
+import BaseButton from "@/components/ui/buttons/BaseButton.vue";
 import TheCenteredLayout from "@/components/layouts/TheCenteredLayout.vue";
 import TheCard from "@/components/ui/cards/TheCard.vue";
 import TheLabel from "@/components/ui/semantics/TheLabel.vue";
@@ -33,7 +33,7 @@ import TheTitle from "@/components/ui/semantics/TheTitle.vue";
 
 export default defineComponent({
   components: {
-    TheButton,
+    BaseButton,
     TheCard,
     TheCenteredLayout,
     TheLabel,

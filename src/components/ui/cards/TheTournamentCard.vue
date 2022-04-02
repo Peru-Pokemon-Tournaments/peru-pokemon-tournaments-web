@@ -50,13 +50,13 @@
         <footer>
           <ul id="actions">
             <li>
-              <the-button>Ver detalles</the-button>
+              <base-button>Ver detalles</base-button>
             </li>
             <li>
-              <the-button>Inscribirme</the-button>
+              <base-button>Inscribirme</base-button>
             </li>
             <li>
-              <the-button>Modificar mi inscripción</the-button>
+              <base-button>Modificar mi inscripción</base-button>
             </li>
           </ul>
         </footer>
@@ -67,12 +67,12 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 import TheCard from "@/components/ui/cards/TheCard.vue";
-import TheButton from "@/components/ui/buttons/TheButton.vue";
+import BaseButton from "@/components/ui/buttons/BaseButton.vue";
 import { Tournament } from "@/models/tournament.model";
 
 export default defineComponent({
   components: {
-    TheButton,
+    BaseButton,
     TheCard,
   },
   props: {
