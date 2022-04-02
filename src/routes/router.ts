@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, Router } from "vue-router";
+import HomePage from "../pages/HomePage.vue";
 import LoginPage from "../pages/LoginPage.vue";
 import RegisterPage from "../pages/RegisterPage.vue";
 
@@ -6,8 +7,9 @@ const AppRouter: Router = createRouter({
   history: createWebHistory(),
   routes: [
     {
+      name: "Home",
       path: "/",
-      redirect: "login",
+      component: HomePage,
     },
     {
       name: "Login",
