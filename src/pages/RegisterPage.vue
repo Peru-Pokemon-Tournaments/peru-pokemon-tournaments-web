@@ -1,6 +1,6 @@
 <template>
   <the-centered-layout id="layout">
-    <the-card id="card">
+    <base-card id="card">
       <template v-slot:header>
         <the-picture id="logo" :src="logoImageAsset" height="150" />
         <the-title> Registro </the-title>
@@ -22,7 +22,7 @@
           <base-button> Enviar </base-button>
         </footer>
       </form>
-    </the-card>
+    </base-card>
   </the-centered-layout>
 </template>
 
@@ -32,7 +32,7 @@ import { mapActions, mapState } from "pinia";
 import { useUserStore } from "@/stores/user";
 import BaseButton from "@/components/ui/buttons/BaseButton.vue";
 import TheCenteredLayout from "@/components/layouts/TheCenteredLayout.vue";
-import TheCard from "@/components/ui/cards/TheCard.vue";
+import BaseCard from "@/components/ui/cards/BaseCard.vue";
 import TheLabel from "@/components/ui/semantics/TheLabel.vue";
 import ThePicture from "@/components/ui/images/ThePicture.vue";
 import TheInput from "@/components/ui/inputs/TheInput.vue";
@@ -41,7 +41,7 @@ import TheTitle from "@/components/ui/semantics/TheTitle.vue";
 export default defineComponent({
   components: {
     BaseButton,
-    TheCard,
+    BaseCard,
     TheCenteredLayout,
     TheLabel,
     ThePicture,

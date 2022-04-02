@@ -1,5 +1,5 @@
 <template>
-  <the-card class="tournament-card">
+  <base-card class="tournament-card">
     <div id="content">
       <picture>
         <img
@@ -62,18 +62,18 @@
         </footer>
       </div>
     </div>
-  </the-card>
+  </base-card>
 </template>
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import TheCard from "@/components/ui/cards/TheCard.vue";
+import BaseCard from "@/components/ui/cards/BaseCard.vue";
 import BaseButton from "@/components/ui/buttons/BaseButton.vue";
 import { Tournament } from "@/models/tournament.model";
 
 export default defineComponent({
   components: {
     BaseButton,
-    TheCard,
+    BaseCard,
   },
   props: {
     tournament: {
