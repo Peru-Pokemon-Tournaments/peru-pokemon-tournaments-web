@@ -7,9 +7,9 @@
       </template>
       <form @submit.prevent="submit">
         <the-label> Correo electrónico </the-label>
-        <the-input v-model="email" type="email" />
+        <base-input v-model="email" type="email" />
         <the-label> Contraseña </the-label>
-        <the-input v-model="password" type="password" />
+        <base-input v-model="password" type="password" />
         <footer>
           <base-button> Iniciar sesión </base-button>
           <router-link to="/register">Registrarse</router-link>
@@ -28,7 +28,7 @@ import TheCenteredLayout from "@/components/layouts/TheCenteredLayout.vue";
 import BaseCard from "@/components/ui/cards/BaseCard.vue";
 import TheLabel from "@/components/ui/semantics/TheLabel.vue";
 import BasePicture from "@/components/ui/images/BasePicture.vue";
-import TheInput from "@/components/ui/inputs/TheInput.vue";
+import BaseInput from "@/components/ui/inputs/BaseInput.vue";
 import TheTitle from "@/components/ui/semantics/TheTitle.vue";
 
 export default defineComponent({
@@ -38,7 +38,7 @@ export default defineComponent({
     TheCenteredLayout,
     TheLabel,
     BasePicture,
-    TheInput,
+    BaseInput,
     TheTitle,
   },
   data() {
