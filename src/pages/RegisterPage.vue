@@ -2,7 +2,7 @@
   <the-centered-layout id="layout">
     <base-card id="card">
       <template v-slot:header>
-        <the-picture id="logo" :src="logoImageAsset" height="150" />
+        <base-picture id="logo" :src="logoImageAsset" height="150" />
         <the-title> Registro </the-title>
       </template>
       <form @submit.prevent="submit">
@@ -34,7 +34,7 @@ import BaseButton from "@/components/ui/buttons/BaseButton.vue";
 import TheCenteredLayout from "@/components/layouts/TheCenteredLayout.vue";
 import BaseCard from "@/components/ui/cards/BaseCard.vue";
 import TheLabel from "@/components/ui/semantics/TheLabel.vue";
-import ThePicture from "@/components/ui/images/ThePicture.vue";
+import BasePicture from "@/components/ui/images/BasePicture.vue";
 import TheInput from "@/components/ui/inputs/TheInput.vue";
 import TheTitle from "@/components/ui/semantics/TheTitle.vue";
 
@@ -44,7 +44,7 @@ export default defineComponent({
     BaseCard,
     TheCenteredLayout,
     TheLabel,
-    ThePicture,
+    BasePicture,
     TheInput,
     TheTitle,
   },
