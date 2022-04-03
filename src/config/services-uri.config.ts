@@ -3,3 +3,4 @@ export const API_DOMAIN: string =
 export const REGISTER_USER_URI: string = "/api/register";
 export const LOGIN_URI: string = "/api/login";
 export const GET_ALL_TOURNAMENTS: string = "/api/tournaments";
+export const GET_COMPLETE_TOURNAMENT: string = "/api/tournaments/:tournamentId";
