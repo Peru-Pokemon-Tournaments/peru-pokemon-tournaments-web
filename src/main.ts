@@ -3,6 +3,7 @@ import { createPinia } from "pinia";
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import "datejs";
+import "animate.css";
 
 import App from "./App.vue";
 import AppRouter from "./routes/router";
