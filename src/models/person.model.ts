@@ -20,4 +20,12 @@ export class Person {
   public static fromJson(json: any): Person {
     return new Person(json["id"], json["first_name"], json["last_name"]);
   }
+
+  public toJson(): object {
+    return {
+      id: this.id,
+      first_name: this.firstName,
+      last_name: this.lastName,
+    };
+  }
 }

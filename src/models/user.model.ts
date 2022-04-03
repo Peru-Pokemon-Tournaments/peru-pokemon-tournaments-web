@@ -32,4 +32,13 @@ export class User {
       Person.fromJson(json["person"])
     );
   }
+
+  public toJson(): object {
+    return {
+      id: this.id,
+      name: this.name,
+      email: this.email,
+      person: this.person.toJson(),
+    };
+  }
 }
