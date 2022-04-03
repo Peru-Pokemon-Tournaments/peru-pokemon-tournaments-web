@@ -2,7 +2,8 @@
   <nav>
     <ul>
       <li>
-        <router-link to="/">
+        <router-link to="/" id="main-logo">
+          <img :src="logoImageAsset" alt="Logo" width="30" />
           <h1>Perú Pokémon Tournaments</h1>
         </router-link>
       </li>
@@ -30,6 +31,9 @@ import { defineComponent } from "vue";
 export default defineComponent({
   computed: {
     ...mapState(useUserStore, ["isLoggedIn"]),
+    logoImageAsset() {
+      return require("@/assets/img/logo.png");
+    },
   },
   methods: {
     ...mapActions(useUserStore, ["logout"]),
@@ -56,6 +60,10 @@ ul {
   }
 }
 
+img {
+  display: inline;
+}
+
 h1 {
   font-size: 1rem;
   font-weight: bold;
@@ -63,5 +71,12 @@ h1 {
 
 a {
   color: $base-primary-navbar-font-color;
+}
+
+#main-logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
 }
 </style>
