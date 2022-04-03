@@ -38,6 +38,8 @@ export const useUserStore = defineStore("user", {
       this.token = null;
       localStorage.removeItem("user");
       localStorage.removeItem("token");
+
+      toast.success("Has salido de Perú Pokémon Tournaments");
     },
     async registerUser({
       firstName,
