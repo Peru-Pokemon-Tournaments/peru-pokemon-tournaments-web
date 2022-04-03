@@ -25,7 +25,7 @@
           <li>
             <b>Fecha y hora de finalización: </b>
             <span>
-              {{ tournament.startDate.toString("dd/MM/yyyy hh:mm tt") }}
+              {{ tournament.endDate.toString("dd/MM/yyyy hh:mm tt") }}
             </span>
           </li>
           <li>
@@ -50,7 +50,7 @@
         <footer>
           <ul id="actions">
             <li>
-              <base-button>Ver detalles</base-button>
+              <base-button @click="goToDetails">Ver detalles</base-button>
             </li>
             <li>
               <base-button>Inscribirme</base-button>
@@ -77,6 +77,16 @@ export default defineComponent({
   computed: {
     defaultImage() {
       return require("@/assets/img/logo.png");
+    },
+  },
+  methods: {
+    goToDetails(): void {
+      this.$router.push({
+        name: "Tournament",
+        params: {
+          tournamentId: this.tournament?.id,
+        },
+      });
     },
   },
 });
