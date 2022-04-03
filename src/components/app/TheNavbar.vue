@@ -2,7 +2,9 @@
   <nav>
     <ul>
       <li>
-        <h1>Perú Pokémon Tournaments</h1>
+        <router-link to="/">
+          <h1>Perú Pokémon Tournaments</h1>
+        </router-link>
       </li>
       <li>
         <ul>

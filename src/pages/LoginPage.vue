@@ -2,7 +2,9 @@
   <the-centered-layout id="layout">
     <base-card id="card">
       <template v-slot:header>
-        <base-picture id="logo" :src="logoImageAsset" height="150" />
+        <router-link to="/">
+          <base-picture id="logo" :src="logoImageAsset" height="150" />
+        </router-link>
         <base-title> Ingresar </base-title>
       </template>
       <form @submit.prevent="submit">
@@ -48,6 +50,9 @@ export default defineComponent({
         email: this.email,
         password: this.password,
       });
+      this.$router.push({
+        name: "Home",
+      });
     },
     clearForm(): void {
       this.email = "";
@@ -83,5 +88,6 @@ footer {
   align-items: center;
   flex-direction: column;
   margin-top: 0.8rem;
+  gap: 0.5rem;
 }
 </style>

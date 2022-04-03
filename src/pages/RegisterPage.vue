@@ -2,7 +2,9 @@
   <the-centered-layout id="layout">
     <base-card id="card">
       <template v-slot:header>
-        <base-picture id="logo" :src="logoImageAsset" height="150" />
+        <router-link to="/">
+          <base-picture id="logo" :src="logoImageAsset" height="150" />
+        </router-link>
         <base-title> Registro </base-title>
       </template>
       <form @submit.prevent="submit">
@@ -19,7 +21,8 @@
         <base-label> Repetir contraseña </base-label>
         <base-input v-model="repeatedPassword" type="password" />
         <footer>
-          <base-button> Enviar </base-button>
+          <base-button> Registrarme </base-button>
+          <router-link to="/login">Iniciar Sesión</router-link>
         </footer>
       </form>
     </base-card>
@@ -99,6 +102,9 @@ export default defineComponent({
 footer {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
   margin-top: 0.8rem;
+  gap: 0.5rem;
 }
 </style>
