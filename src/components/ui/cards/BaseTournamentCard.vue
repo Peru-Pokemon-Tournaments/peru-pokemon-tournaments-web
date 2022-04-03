@@ -52,10 +52,10 @@
             <li>
               <base-button @click="goToDetails">Ver detalles</base-button>
             </li>
-            <li>
+            <li v-if="isLoggedIn">
               <base-button>Inscribirme</base-button>
             </li>
-            <li>
+            <li v-if="isLoggedIn">
               <base-button>Modificar mi inscripción</base-button>
             </li>
           </ul>
@@ -67,6 +67,8 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 import { Tournament } from "@/models/tournament.model";
+import { mapState } from "pinia";
+import { useUserStore } from "@/stores/user";
 
 export default defineComponent({
   props: {
@@ -75,6 +77,7 @@ export default defineComponent({
     },
   },
   computed: {
+    ...mapState(useUserStore, ["isLoggedIn"]),
     defaultImage() {
       return require("@/assets/img/logo.png");
     },

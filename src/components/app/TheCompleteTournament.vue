@@ -52,10 +52,13 @@
           <li>
             <base-button>Participantes</base-button>
           </li>
-          <li>
+          <li v-if="isLoggedIn">
             <base-button>Inscribirme</base-button>
           </li>
-          <li>
+          <li v-else>
+            <base-button>Iniciar sesión para inscribirme</base-button>
+          </li>
+          <li v-if="isLoggedIn">
             <base-button>Modificar mi inscripción</base-button>
           </li>
         </ul>
@@ -111,6 +114,8 @@
 <script lang="ts">
 import { CompleteTournament } from "@/models/complete-tournament.model";
 import { Tournament } from "@/models/tournament.model";
+import { useUserStore } from "@/stores/user";
+import { mapState } from "pinia";
 import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
@@ -125,6 +130,7 @@ export default defineComponent({
     },
   },
   computed: {
+    ...mapState(useUserStore, ["isLoggedIn"]),
     defaultImage() {
       return require("@/assets/img/logo.png");
     },

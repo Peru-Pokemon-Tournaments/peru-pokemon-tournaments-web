@@ -33,6 +33,12 @@ export const useUserStore = defineStore("user", {
       this.user = User.fromJson(JSON.parse(stringUser));
       this.token = token;
     },
+    logout(): void {
+      this.user = null;
+      this.token = null;
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+    },
     async registerUser({
       firstName,
       lastName,

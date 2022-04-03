@@ -6,11 +6,14 @@
       </li>
       <li>
         <ul>
-          <li>
+          <li v-if="!isLoggedIn">
             <router-link to="/login">Iniciar Sesión</router-link>
           </li>
-          <li>
+          <li v-if="!isLoggedIn">
             <router-link to="/register">Registrarse</router-link>
+          </li>
+          <li v-if="isLoggedIn">
+            <a href="/logout" @click.prevent="logout">Salir</a>
           </li>
         </ul>
       </li>
@@ -18,10 +21,17 @@
   </nav>
 </template>
 <script lang="ts">
+import { useUserStore } from "@/stores/user";
+import { mapActions, mapState } from "pinia";
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  setup() {},
+  computed: {
+    ...mapState(useUserStore, ["isLoggedIn"]),
+  },
+  methods: {
+    ...mapActions(useUserStore, ["logout"]),
+  },
 });
 </script>
 <style lang="scss" scoped>
