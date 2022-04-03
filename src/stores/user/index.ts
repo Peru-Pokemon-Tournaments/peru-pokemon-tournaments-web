@@ -22,6 +22,17 @@ export const useUserStore = defineStore("user", {
     },
   },
   actions: {
+    tryLogInFromCache(): void {
+      const stringUser: string | null = localStorage.getItem("user");
+      const token: string | null = localStorage.getItem("token");
+
+      if (!stringUser || !token) {
+        return;
+      }
+
+      this.user = User.fromJson(JSON.parse(stringUser));
+      this.token = token;
+    },
     async registerUser({
       firstName,
       lastName,
@@ -73,6 +84,9 @@ export const useUserStore = defineStore("user", {
 
         this.user = userToken.user;
         this.token = userToken.token;
+
+        localStorage.setItem("user", JSON.stringify(userToken.user.toJson()));
+        localStorage.setItem("token", userToken.token);
 
         toast.success(userToken.message);
       } catch (error: any | ResponseError) {

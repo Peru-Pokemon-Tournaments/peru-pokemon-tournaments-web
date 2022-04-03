@@ -3,9 +3,18 @@
 </template>
 
 <script lang="ts">
+import { mapActions } from "pinia";
 import { defineComponent } from "vue-demi";
+import { useUserStore } from "./stores/user";
 
-export default defineComponent({});
+export default defineComponent({
+  methods: {
+    ...mapActions(useUserStore, ["tryLogInFromCache"]),
+  },
+  mounted(): void {
+    this.tryLogInFromCache();
+  },
+});
 </script>
 
 <style lang="scss">
