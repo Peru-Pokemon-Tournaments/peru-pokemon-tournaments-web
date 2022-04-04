@@ -21,6 +21,7 @@ import TheNavbar from "@/components/app/TheNavbar.vue";
 import TheCompleteTournament from "@/components/app/TheCompleteTournament.vue";
 import { mapActions, mapState } from "pinia";
 import { useTournamentStore } from "@/stores/tournament";
+import { useUserStore } from "@/stores/user";
 
 export default defineComponent({
   components: {
@@ -42,9 +43,11 @@ export default defineComponent({
   },
   methods: {
     ...mapActions(useTournamentStore, ["loadTournament"]),
+    ...mapActions(useUserStore, ["loadEnrollment"]),
   },
   mounted(): void {
     this.loadTournament(this.tournamentId);
+    this.loadEnrollment(this.tournamentId);
   },
 });
 </script>
