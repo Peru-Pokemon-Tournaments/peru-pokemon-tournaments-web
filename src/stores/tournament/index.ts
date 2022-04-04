@@ -13,6 +13,7 @@ export const useTournamentStore = defineStore("tournament", {
       tournaments: [] as Tournament[],
       tournament: null as CompleteTournament | null,
       competitors: [] as Competitor[],
+      loadingCompetitors: false as boolean,
     };
   },
   getters: {
@@ -27,6 +28,12 @@ export const useTournamentStore = defineStore("tournament", {
     },
     hasSelectedTournament(): boolean {
       return this.tournament !== null;
+    },
+    hasSelectedTournamentCompetitors(): boolean {
+      return this.competitors.length !== 0;
+    },
+    isLoadingCompetitors(): boolean {
+      return this.loadingCompetitors;
     },
   },
   actions: {
@@ -53,11 +60,14 @@ export const useTournamentStore = defineStore("tournament", {
     },
 
     async loadTournamentCompetitors(tournamentId: string): Promise<void> {
+      this.loadingCompetitors = true;
       try {
         this.competitors =
           await this.tournamentService.getCompetitorsInTournament(tournamentId);
       } catch (error: any | ResponseError) {
         toast.error(error.message);
+      } finally {
+        this.loadingCompetitors = false;
       }
     },
   },
