@@ -3,6 +3,7 @@ import { useToast } from "vue-toastification";
 import { ResponseError } from "@/services/interfaces/reponse-error";
 import { Tournament } from "@/models/tournament.model";
 import { CompleteTournament } from "@/models/complete-tournament.model";
+import { Competitor } from "@/models/competitor.model";
 
 const toast = useToast();
 
@@ -11,6 +12,7 @@ export const useTournamentStore = defineStore("tournament", {
     return {
       tournaments: [] as Tournament[],
       tournament: null as CompleteTournament | null,
+      competitors: [] as Competitor[],
     };
   },
   getters: {
@@ -19,6 +21,9 @@ export const useTournamentStore = defineStore("tournament", {
     },
     selectedTournament(): CompleteTournament | null {
       return this.tournament as CompleteTournament;
+    },
+    selectedTournamentCompetitors(): Competitor[] {
+      return this.competitors as Competitor[];
     },
     hasSelectedTournament(): boolean {
       return this.tournament !== null;
@@ -42,6 +47,15 @@ export const useTournamentStore = defineStore("tournament", {
         this.tournament = await this.tournamentService.getCompleteTournament(
           tournamentId
         );
+      } catch (error: any | ResponseError) {
+        toast.error(error.message);
+      }
+    },
+
+    async loadTournamentCompetitors(tournamentId: string): Promise<void> {
+      try {
+        this.competitors =
+          await this.tournamentService.getCompetitorsInTournament(tournamentId);
       } catch (error: any | ResponseError) {
         toast.error(error.message);
       }
