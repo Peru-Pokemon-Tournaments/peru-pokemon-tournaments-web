@@ -52,12 +52,6 @@
             <li>
               <base-button @click="goToDetails">Ver detalles</base-button>
             </li>
-            <li v-if="isLoggedIn">
-              <base-button>Inscribirme</base-button>
-            </li>
-            <li v-if="isLoggedIn">
-              <base-button>Modificar mi inscripción</base-button>
-            </li>
           </ul>
         </footer>
       </div>
