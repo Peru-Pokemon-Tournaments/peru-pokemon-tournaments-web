@@ -46,20 +46,37 @@
             {{ tournament.price.formatted }}
           </span>
         </li>
+        <li>
+          <b>Total inscritos: </b>
+          <span>
+            {{ tournament.totalCompetitors }}
+          </span>
+        </li>
       </ul>
       <section>
         <ul id="actions">
           <li>
-            <base-button>Participantes</base-button>
+            <router-link :to="`/tournaments/${tournament.id}/competitors`">
+              <base-button>Participantes</base-button>
+            </router-link>
           </li>
-          <li v-if="isLoggedIn">
-            <base-button>Inscribirme</base-button>
+          <li v-if="showUpdateInscription">
+            <router-link :to="`/tournaments/${tournament.id}/inscription/edit`">
+              <base-button> Modificar mi inscripción </base-button>
+            </router-link>
           </li>
-          <li v-else>
-            <base-button>Iniciar sesión para inscribirme</base-button>
+          <li v-if="showToInscription">
+            <router-link :to="`/tournaments/${tournament.id}/inscription`">
+              <base-button> Inscribirme </base-button>
+            </router-link>
           </li>
-          <li v-if="isLoggedIn">
-            <base-button>Modificar mi inscripción</base-button>
+          <li v-if="!isLoggedIn">
+            <router-link to="/login">
+              <base-button>Iniciar sesión para inscribirme</base-button>
+            </router-link>
+          </li>
+          <li v-if="showDeleteInscription">
+            <base-button>Eliminar mi inscripción</base-button>
           </li>
         </ul>
       </section>
@@ -130,9 +147,30 @@ export default defineComponent({
     },
   },
   computed: {
-    ...mapState(useUserStore, ["isLoggedIn"]),
+    ...mapState(useUserStore, ["isLoggedIn", "isEnrolledToSelectedTournament"]),
     defaultImage() {
       return require("@/assets/img/logo.png");
+    },
+    showUpdateInscription() {
+      return (
+        this.isLoggedIn &&
+        this.isEnrolledToSelectedTournament &&
+        this.tournament.canUpdateInscriptions
+      );
+    },
+    showToInscription() {
+      return (
+        this.isLoggedIn &&
+        !this.isEnrolledToSelectedTournament &&
+        this.tournament.canReceiveInscriptions
+      );
+    },
+    showDeleteInscription() {
+      return (
+        this.isLoggedIn &&
+        this.isEnrolledToSelectedTournament &&
+        (!this.tournament.isStarted || !this.tournament.isEnded)
+      );
     },
   },
 });
@@ -178,6 +216,10 @@ b {
     display: inline-block;
 
     margin-left: 0.5rem;
+
+    a {
+      text-decoration: none;
+    }
   }
 }
 </style>
