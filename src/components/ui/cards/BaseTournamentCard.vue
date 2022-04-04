@@ -50,7 +50,9 @@
         <footer>
           <ul id="actions">
             <li>
-              <base-button @click="goToDetails">Ver detalles</base-button>
+              <router-link :to="`/tournaments/${tournament.id}`">
+                <base-button>Ver detalles</base-button>
+              </router-link>
             </li>
           </ul>
         </footer>
@@ -74,16 +76,6 @@ export default defineComponent({
     ...mapState(useUserStore, ["isLoggedIn"]),
     defaultImage() {
       return require("@/assets/img/logo.png");
-    },
-  },
-  methods: {
-    goToDetails(): void {
-      this.$router.push({
-        name: "Tournament",
-        params: {
-          tournamentId: this.tournament?.id,
-        },
-      });
     },
   },
 });
@@ -170,6 +162,10 @@ export default defineComponent({
           display: inline-block;
 
           margin-left: 0.5rem;
+
+          a {
+            text-decoration: none;
+          }
         }
       }
     }
