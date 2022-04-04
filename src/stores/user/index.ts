@@ -11,6 +11,7 @@ export const useUserStore = defineStore("user", {
       registerUserSuccessful: false,
       user: null as User | null,
       token: null as string | null,
+      enrolledToSelectedTournament: false as boolean,
     };
   },
   getters: {
@@ -19,6 +20,9 @@ export const useUserStore = defineStore("user", {
     },
     isLoggedIn(): boolean {
       return this.user !== null;
+    },
+    isEnrolledToSelectedTournament(): boolean {
+      return this.enrolledToSelectedTournament;
     },
   },
   actions: {
@@ -97,6 +101,22 @@ export const useUserStore = defineStore("user", {
         localStorage.setItem("token", userToken.token);
 
         toast.success(userToken.message);
+      } catch (error: any | ResponseError) {
+        toast.error(error.message);
+      }
+    },
+
+    async loadEnrollment(tournamentId: string): Promise<void> {
+      if (!this.isLoggedIn) return;
+
+      this.enrolledToSelectedTournament = false;
+
+      try {
+        this.enrolledToSelectedTournament =
+          await this.inscriptionService.isCompetitorEnrolled(
+            this.user!.competitor.id,
+            tournamentId
+          );
       } catch (error: any | ResponseError) {
         toast.error(error.message);
       }
