@@ -50,5 +50,29 @@ export const useInscriptionStore = defineStore("inscription", {
         this.loadingCreateInscription = false;
       }
     },
+    async deleteInscription(): Promise<void> {
+      const userStore = useUserStore();
+      const tournamentStore = useTournamentStore();
+
+      if (!userStore.isLoggedIn || !tournamentStore.hasSelectedTournament) {
+        return;
+      }
+
+      try {
+        const message = await this.inscriptionService.deleteInscription(
+          userStore.loggedUser!.competitor.id,
+          tournamentStore.selectedTournament!.tournament.id
+        );
+
+        this.inscription = null;
+        userStore.loadEnrollment(
+          tournamentStore.selectedTournament!.tournament.id
+        );
+
+        toast.success(message);
+      } catch (error: any | ResponseError) {
+        toast.error(error.message);
+      }
+    },
   },
 });
