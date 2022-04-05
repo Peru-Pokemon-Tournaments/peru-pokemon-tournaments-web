@@ -11,8 +11,8 @@ export const ENROLL_TO_TOURNAMENT: string =
 export const GET_COMPETITORS_IN_TOURNAMENT: string =
   "/api/tournaments/:tournamentId/inscriptions";
 export const GET_TOURNAMENT_INSCRIPTION: string =
-  "/api/inscriptions/:inscriptionId";
+  "/api/tournaments/:tournamentId/competitors/:competitorId/inscription";
 export const DELETE_TOURNAMENT_INSCRIPTION: string =
-  "/api/inscriptions/:inscriptionId";
+  "/api/tournaments/:tournamentId/competitors/:competitorId/inscription";
 export const UPDATE_TOURNAMENT_INSCRIPTION: string =
   "/api/inscriptions/:inscriptionId";
