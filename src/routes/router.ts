@@ -5,6 +5,7 @@ import RegisterPage from "../pages/RegisterPage.vue";
 import TournamentPage from "../pages/TournamentPage.vue";
 import TournamentCompetitorsPage from "../pages/TournamentCompetitorsPage.vue";
 import TournamentInscriptionPage from "../pages/TournamentInscriptionPage.vue";
+import TournamentInscriptionEditPage from "../pages/TournamentInscriptionEditPage.vue";
 
 const AppRouter: Router = createRouter({
   history: createWebHistory(),
@@ -41,6 +42,12 @@ const AppRouter: Router = createRouter({
       path: "/tournaments/:tournamentId/inscription",
       props: true,
       component: TournamentInscriptionPage,
+    },
+    {
+      name: "TournamentInscriptionEdit",
+      path: "/tournaments/:tournamentId/inscription/edit",
+      props: true,
+      component: TournamentInscriptionEditPage,
     },
   ],
 });
