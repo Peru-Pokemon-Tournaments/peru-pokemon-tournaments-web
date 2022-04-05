@@ -172,7 +172,8 @@ export default defineComponent({
       return (
         this.isLoggedIn &&
         this.isEnrolledToSelectedTournament &&
-        (!this.tournament.isStarted || !this.tournament.isEnded)
+        !this.tournament.isStarted &&
+        !this.tournament.isEnded
       );
     },
   },
