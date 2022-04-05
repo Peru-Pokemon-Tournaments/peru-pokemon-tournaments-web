@@ -91,8 +91,13 @@ export default defineComponent({
 
 #card {
   width: 60%;
-  min-width: 15rem;
+  min-width: 20rem;
   max-width: 25rem;
+
+  @media (max-width: 400px) {
+    min-width: auto;
+    width: 100%;
+  }
 }
 
 #logo {
