@@ -85,7 +85,8 @@ export default defineComponent({
   height: fit-content;
   min-width: 5rem;
   max-width: 40rem;
-  margin: 0.5rem;
+  margin: 1rem;
+  width: calc(100% - 2rem);
 
   #content {
     height: 100%;
@@ -93,7 +94,7 @@ export default defineComponent({
     flex-direction: row;
 
     picture {
-      min-width: 8rem;
+      min-width: 12.5rem;
       width: 12.5rem;
       height: 12.5rem;
 
@@ -109,7 +110,6 @@ export default defineComponent({
     }
 
     > div {
-      max-width: 23.5rem;
       margin-left: 1rem;
 
       @media (max-width: 750px) {

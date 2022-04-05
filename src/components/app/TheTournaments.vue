@@ -32,15 +32,10 @@ export default defineComponent({
 #tournaments {
   box-sizing: border-box;
   width: 100%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  padding-bottom: 1rem;
 
   > li {
-    // width: calc(100% - 20rem);
-    max-width: 50rem;
-    min-width: 10rem;
+    width: fit-content;
+    margin: 0 auto;
   }
 }
 </style>
