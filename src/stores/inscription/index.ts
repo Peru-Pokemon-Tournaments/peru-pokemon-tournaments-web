@@ -12,6 +12,8 @@ export const useInscriptionStore = defineStore("inscription", {
     return {
       inscription: null as TournamentInscription | null,
       loadingCreateInscription: false as boolean,
+      loadingUpdateInscription: false as boolean,
+      loadingInscription: false as boolean,
     };
   },
   getters: {
@@ -21,8 +23,38 @@ export const useInscriptionStore = defineStore("inscription", {
     isLoadingCreateInscription(): boolean {
       return this.loadingCreateInscription;
     },
+    isLoadingUpdateInscription(): boolean {
+      return this.loadingUpdateInscription;
+    },
+    isLoadingInscription(): boolean {
+      return this.loadingInscription;
+    },
+    hasInscription(): boolean {
+      return this.inscription !== null;
+    },
   },
   actions: {
+    async loadInscription(): Promise<void> {
+      const userStore = useUserStore();
+      const tournamentStore = useTournamentStore();
+
+      if (!userStore.isLoggedIn || !tournamentStore.hasSelectedTournament) {
+        return;
+      }
+
+      this.loadingInscription = true;
+
+      try {
+        this.inscription = await this.inscriptionService.getInscription(
+          userStore.loggedUser!.competitor.id,
+          tournamentStore.selectedTournament!.tournament.id
+        );
+      } catch (error: any | ResponseError) {
+        toast.error(error.message);
+      } finally {
+        this.loadingInscription = false;
+      }
+    },
     async createInscription(team: string): Promise<void> {
       const userStore = useUserStore();
       const tournamentStore = useTournamentStore();
@@ -48,6 +80,29 @@ export const useInscriptionStore = defineStore("inscription", {
         toast.error(error.message);
       } finally {
         this.loadingCreateInscription = false;
+      }
+    },
+    async updateInscription(team: string): Promise<void> {
+      if (!this.hasInscription) {
+        return;
+      }
+
+      this.loadingUpdateInscription = true;
+
+      try {
+        const { inscription, message } =
+          await this.inscriptionService.updateInscription(
+            this.inscription!.id,
+            team
+          );
+
+        this.inscription = inscription;
+
+        toast.success(message);
+      } catch (error: any | ResponseError) {
+        toast.error(error.message);
+      } finally {
+        this.loadingUpdateInscription = false;
       }
     },
     async deleteInscription(): Promise<void> {
