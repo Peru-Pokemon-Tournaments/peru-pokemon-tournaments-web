@@ -71,7 +71,7 @@ export class Tournament {
   }
 
   public get formattedStatus(): string {
-    if (this.status == "IN_PROGRESS") return "Pendiente";
+    if (this.status == "IN_PROGRESS") return "En progreso";
     if (this.status == "NOT_STARTED") return "Sin empezar";
     return "Finalizado";
   }
