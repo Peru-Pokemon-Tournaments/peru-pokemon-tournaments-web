@@ -1,4 +1,6 @@
-const { defineConfig } = require('@vue/cli-service')
+const { defineConfig } = require("@vue/cli-service");
+const webpack = require("webpack");
+
 module.exports = defineConfig({
   css: {
     loaderOptions: {
@@ -6,7 +8,8 @@ module.exports = defineConfig({
         additionalData: `
           @import "@/styles/_config.scss";
         `,
-      }
-    }
+      },
+    },
   },
-})
+  pluginOptions: [new webpack.EnvironmentPlugin(["VUE_APP_API_DOMAIN"])],
+});
