@@ -52,6 +52,12 @@
             {{ tournament.totalCompetitors }}
           </span>
         </li>
+        <li>
+          <b>Estado: </b>
+          <span>
+            {{ tournament.formattedStatus }}
+          </span>
+        </li>
       </ul>
       <section>
         <ul id="actions">
