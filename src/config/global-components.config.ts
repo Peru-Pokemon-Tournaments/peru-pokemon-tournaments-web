@@ -6,6 +6,7 @@ import BaseInput from "@/components/ui/inputs/BaseInput.vue";
 import BaseLabel from "@/components/ui/semantics/BaseLabel.vue";
 import BaseTitle from "@/components/ui/semantics/BaseTitle.vue";
 import BaseLoader from "@/components/ui/loaders/BaseLoader.vue";
+import BasePokemonShowdownInput from "@/components/ui/inputs/BasePokemonShowdownInput.vue";
 
 export const addComponents = (app: App): void => {
   app.component("base-button", BaseButton);
@@ -15,4 +16,5 @@ export const addComponents = (app: App): void => {
   app.component("base-label", BaseLabel);
   app.component("base-title", BaseTitle);
   app.component("base-loader", BaseLoader);
+  app.component("base-pokemon-showdown-input", BasePokemonShowdownInput);
 };
