@@ -11,8 +11,14 @@ import { ResponseError } from "./interfaces/reponse-error";
 import { TournamentInscription } from "@/models/tournament-inscription.model";
 
 export interface InscriptionService {
-  getInscription(inscriptionId: string): Promise<TournamentInscription>;
-  deleteInscription(inscriptionId: string): Promise<string>;
+  getInscription(
+    competitorId: string,
+    tournamentId: string
+  ): Promise<TournamentInscription>;
+  deleteInscription(
+    competitorId: string,
+    tournamentId: string
+  ): Promise<string>;
   isCompetitorEnrolled(
     competitorId: string,
     tournamentId: string
@@ -31,11 +37,17 @@ export interface InscriptionService {
 export class ApiInscriptionService implements InscriptionService {
   constructor(private _httpClient: AxiosInstance) {}
 
-  async getInscription(inscriptionId: string): Promise<TournamentInscription> {
+  async getInscription(
+    competitorId: string,
+    tournamentId: string
+  ): Promise<TournamentInscription> {
     try {
       const response = await this._httpClient.get(
         API_DOMAIN +
-          GET_TOURNAMENT_INSCRIPTION.replace(":inscriptionId", inscriptionId)
+          GET_TOURNAMENT_INSCRIPTION.replace(
+            ":competitorId",
+            competitorId
+          ).replace(":tournamentId", tournamentId)
       );
 
       return TournamentInscription.fromJson(
@@ -71,11 +83,17 @@ export class ApiInscriptionService implements InscriptionService {
     }
   }
 
-  async deleteInscription(inscriptionId: string): Promise<string> {
+  async deleteInscription(
+    competitorId: string,
+    tournamentId: string
+  ): Promise<string> {
     try {
       const response = await this._httpClient.delete(
         API_DOMAIN +
-          DELETE_TOURNAMENT_INSCRIPTION.replace(":inscriptionId", inscriptionId)
+          DELETE_TOURNAMENT_INSCRIPTION.replace(
+            ":competitorId",
+            competitorId
+          ).replace(":tournamentId", tournamentId)
       );
 
       return response.data?.message as string;
@@ -98,7 +116,7 @@ export class ApiInscriptionService implements InscriptionService {
           ENROLL_TO_TOURNAMENT.replace(":tournamentId", tournamentId),
         {
           competitor_id: competitorId,
-          pokemon_showdown_export_team: pokemonShowdownExportTeam,
+          pokemon_showdown_team_export: pokemonShowdownExportTeam,
         }
       );
 
