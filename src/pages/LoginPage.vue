@@ -50,9 +50,6 @@ export default defineComponent({
         email: this.email,
         password: this.password,
       });
-      this.$router.push({
-        name: "Home",
-      });
     },
     clearForm(): void {
       this.email = "";
@@ -62,6 +59,9 @@ export default defineComponent({
   watch: {
     isLoggedIn() {
       this.clearForm();
+      this.$router.push({
+        name: "Home",
+      });
     },
   },
 });
@@ -74,8 +74,13 @@ export default defineComponent({
 
 #card {
   width: 60%;
-  min-width: 15rem;
+  min-width: 20rem;
   max-width: 25rem;
+
+  @media (max-width: 400px) {
+    min-width: auto;
+    width: 100%;
+  }
 }
 
 #logo {
