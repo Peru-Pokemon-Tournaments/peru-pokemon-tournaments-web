@@ -1,7 +1,7 @@
 <template>
   <nav>
     <ul>
-      <li>
+      <li id="main-li">
         <router-link to="/" id="main-logo">
           <img :src="logoImageAsset" alt="Logo" width="30" />
           <h1>Perú Pokémon Tournaments</h1>
@@ -12,6 +12,7 @@
           <li v-if="!isLoggedIn">
             <router-link to="/login">Iniciar Sesión</router-link>
           </li>
+          <span class="separator"></span>
           <li v-if="!isLoggedIn">
             <router-link to="/register">Registrarse</router-link>
           </li>
@@ -55,9 +56,13 @@ ul {
   align-items: center;
   justify-content: space-between;
 
-  li {
+  #main-li {
     margin-right: 1rem;
   }
+}
+
+.separator {
+  width: 0.5rem;
 }
 
 img {
@@ -71,6 +76,11 @@ h1 {
 
 a {
   color: $base-primary-navbar-font-color;
+  text-decoration: none;
+
+  &:hover {
+    font-weight: bold;
+  }
 }
 
 #main-logo {
