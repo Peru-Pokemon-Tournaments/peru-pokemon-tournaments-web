@@ -12,6 +12,12 @@ module.exports = defineConfig({
     },
   },
   configureWebpack: {
-    plugins: [new webpack.EnvironmentPlugin(["VUE_APP_API_DOMAIN"])],
+    plugins: [
+      new webpack.DefinePlugin({
+        "process.env": {
+          VUE_APP_API_DOMAIN: JSON.stringify(process.env.VUE_APP_API_DOMAIN),
+        },
+      }),
+    ],
   },
 });
