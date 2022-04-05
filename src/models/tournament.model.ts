@@ -73,7 +73,7 @@ export class Tournament {
   public get formattedStatus(): string {
     if (this.status == "IN_PROGRESS") return "Pendiente";
     if (this.status == "NOT_STARTED") return "Sin empezar";
-    return "ENDED";
+    return "Finalizado";
   }
 
   public get canReceiveInscriptions(): boolean {
@@ -98,8 +98,8 @@ export class Tournament {
       json["title"],
       json["description"],
       json["place"],
-      new Date(json["start_date"]),
-      new Date(json["end_date"]),
+      new Date(json["start_date"] + "+0"), // using +0 to define is utc 0
+      new Date(json["end_date"] + "+0"), // using +0 to define is utc 0
       json["total_competitors"],
       TournamentFormat.fromJson(json["tournament_format"]),
       TournamentPrice.fromJson(json["tournament_price"]),
