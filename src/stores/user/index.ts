@@ -24,6 +24,9 @@ export const useUserStore = defineStore("user", {
     isEnrolledToSelectedTournament(): boolean {
       return this.enrolledToSelectedTournament;
     },
+    loggedUser(): User | null {
+      return this.user as User;
+    },
   },
   actions: {
     tryLogInFromCache(): void {
