@@ -31,7 +31,7 @@ export interface InscriptionService {
   updateInscription(
     inscriptionId: string,
     pokemonShowdownExportTeam: string
-  ): Promise<TournamentInscription>;
+  ): Promise<{ inscription: TournamentInscription; message: string }>;
 }
 
 export class ApiInscriptionService implements InscriptionService {
@@ -137,7 +137,7 @@ export class ApiInscriptionService implements InscriptionService {
   async updateInscription(
     inscriptionId: string,
     pokemonShowdownExportTeam: string
-  ): Promise<TournamentInscription> {
+  ): Promise<{ inscription: TournamentInscription; message: string }> {
     try {
       const response = await this._httpClient.patch(
         API_DOMAIN +
@@ -146,13 +146,16 @@ export class ApiInscriptionService implements InscriptionService {
             inscriptionId
           ),
         {
-          pokemon_showdown_export_team: pokemonShowdownExportTeam,
+          pokemon_showdown_team_export: pokemonShowdownExportTeam,
         }
       );
 
-      return TournamentInscription.fromJson(
-        response.data?.tournament_inscription
-      );
+      return {
+        inscription: TournamentInscription.fromJson(
+          response.data?.tournament_inscription
+        ),
+        message: response.data?.message,
+      };
     } catch (error: any | Error | AxiosError) {
       throw new ResponseError(
         error.response.data.message,
