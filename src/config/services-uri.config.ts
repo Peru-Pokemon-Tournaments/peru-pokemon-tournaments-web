@@ -7,7 +7,7 @@ export const GET_COMPLETE_TOURNAMENT: string = "/api/tournaments/:tournamentId";
 export const CHECK_ENROLL: string =
   "/api/tournaments/:tournamentId/competitors/:competitorId/is-enrolled";
 export const ENROLL_TO_TOURNAMENT: string =
-  "/api/tournaments/:tounamentId/inscriptions";
+  "/api/tournaments/:tournamentId/inscriptions";
 export const GET_COMPETITORS_IN_TOURNAMENT: string =
   "/api/tournaments/:tournamentId/inscriptions";
 export const GET_TOURNAMENT_INSCRIPTION: string =
