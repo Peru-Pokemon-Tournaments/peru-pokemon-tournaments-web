@@ -48,7 +48,7 @@ export default defineComponent({
       "selectedTournament",
       "hasSelectedTournament",
     ]),
-    ...mapState(useUserStore, ["isEnrolledToSelectedTournament"]),
+    ...mapState(useUserStore, ["isEnrolledToSelectedTournament", "isLoggedIn"]),
     defaultImage() {
       return require("@/assets/img/logo.png");
     },
@@ -64,6 +64,13 @@ export default defineComponent({
     ...mapActions(useUserStore, ["loadEnrollment"]),
   },
   watch: {
+    isLoggedIn(isLogged: boolean): void {
+      if (!isLogged) {
+        this.$router.replace({
+          name: "Home",
+        });
+      }
+    },
     isEnrolledToSelectedTournament(isEnrolled: boolean): void {
       if (isEnrolled) {
         this.$router.replace({
@@ -76,6 +83,12 @@ export default defineComponent({
     },
   },
   beforeMount(): void {
+    if (!this.isLoggedIn) {
+      this.$router.replace({
+        name: "Home",
+      });
+    }
+
     if (
       !this.hasSelectedTournament ||
       this.selectedTournament!.tournament.id !== this.tournamentId

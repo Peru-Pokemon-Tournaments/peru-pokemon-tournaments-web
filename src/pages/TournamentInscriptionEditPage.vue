@@ -52,7 +52,7 @@ export default defineComponent({
       "selectedTournament",
       "hasSelectedTournament",
     ]),
-    ...mapState(useUserStore, ["isEnrolledToSelectedTournament"]),
+    ...mapState(useUserStore, ["isEnrolledToSelectedTournament", "isLoggedIn"]),
     ...mapState(useInscriptionStore, [
       "isLoadingInscription",
       "hasInscription",
@@ -73,6 +73,13 @@ export default defineComponent({
     ...mapActions(useInscriptionStore, ["loadInscription"]),
   },
   watch: {
+    isLoggedIn(isLogged: boolean): void {
+      if (!isLogged) {
+        this.$router.replace({
+          name: "Home",
+        });
+      }
+    },
     isEnrolledToSelectedTournament(isEnrolled: boolean): void {
       if (!isEnrolled) {
         this.$router.replace({
@@ -85,6 +92,12 @@ export default defineComponent({
     },
   },
   async beforeMount(): Promise<void> {
+    if (!this.isLoggedIn) {
+      this.$router.replace({
+        name: "Home",
+      });
+    }
+
     if (
       !this.hasSelectedTournament ||
       this.selectedTournament!.tournament.id !== this.tournamentId
