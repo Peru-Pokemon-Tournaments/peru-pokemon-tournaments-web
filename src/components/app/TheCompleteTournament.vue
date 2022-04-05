@@ -76,7 +76,9 @@
             </router-link>
           </li>
           <li v-if="showDeleteInscription">
-            <base-button>Eliminar mi inscripción</base-button>
+            <base-button @click="deleteInscription">
+              Eliminar mi inscripción
+            </base-button>
           </li>
         </ul>
       </section>
@@ -131,8 +133,9 @@
 <script lang="ts">
 import { CompleteTournament } from "@/models/complete-tournament.model";
 import { Tournament } from "@/models/tournament.model";
+import { useInscriptionStore } from "@/stores/inscription";
 import { useUserStore } from "@/stores/user";
-import { mapState } from "pinia";
+import { mapActions, mapState } from "pinia";
 import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
@@ -172,6 +175,9 @@ export default defineComponent({
         (!this.tournament.isStarted || !this.tournament.isEnded)
       );
     },
+  },
+  methods: {
+    ...mapActions(useInscriptionStore, ["deleteInscription"]),
   },
 });
 </script>
