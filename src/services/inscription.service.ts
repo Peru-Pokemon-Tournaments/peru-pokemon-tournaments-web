@@ -13,33 +13,45 @@ import { TournamentInscription } from "@/models/tournament-inscription.model";
 export interface InscriptionService {
   getInscription(
     competitorId: string,
-    tournamentId: string
+    tournamentId: string,
+    token: string
   ): Promise<TournamentInscription>;
   deleteInscription(
     competitorId: string,
-    tournamentId: string
+    tournamentId: string,
+    token: string
   ): Promise<string>;
   isCompetitorEnrolled(
     competitorId: string,
-    tournamentId: string
+    tournamentId: string,
+    token: string
   ): Promise<boolean>;
   enrollToTournament(
     competitorId: string,
     tournamentId: string,
-    pokemonShowdownExportTeam: string
+    pokemonShowdownExportTeam: string,
+    token: string
   ): Promise<{ inscription: TournamentInscription; message: string }>;
   updateInscription(
     inscriptionId: string,
-    pokemonShowdownExportTeam: string
+    pokemonShowdownExportTeam: string,
+    token: string
   ): Promise<{ inscription: TournamentInscription; message: string }>;
 }
 
 export class ApiInscriptionService implements InscriptionService {
   constructor(private _httpClient: AxiosInstance) {}
 
+  private _buildTokenHeader(token: string): { Authorization: string } {
+    return {
+      Authorization: `Bearer ${token}`,
+    };
+  }
+
   async getInscription(
     competitorId: string,
-    tournamentId: string
+    tournamentId: string,
+    token: string
   ): Promise<TournamentInscription> {
     try {
       const response = await this._httpClient.get(
@@ -47,7 +59,12 @@ export class ApiInscriptionService implements InscriptionService {
           GET_TOURNAMENT_INSCRIPTION.replace(
             ":competitorId",
             competitorId
-          ).replace(":tournamentId", tournamentId)
+          ).replace(":tournamentId", tournamentId),
+        {
+          headers: {
+            ...this._buildTokenHeader(token),
+          },
+        }
       );
 
       return TournamentInscription.fromJson(
@@ -63,7 +80,8 @@ export class ApiInscriptionService implements InscriptionService {
 
   async isCompetitorEnrolled(
     competitorId: string,
-    tournamentId: string
+    tournamentId: string,
+    token: string
   ): Promise<boolean> {
     try {
       const response = await this._httpClient.get(
@@ -71,7 +89,12 @@ export class ApiInscriptionService implements InscriptionService {
           CHECK_ENROLL.replace(":competitorId", competitorId).replace(
             ":tournamentId",
             tournamentId
-          )
+          ),
+        {
+          headers: {
+            ...this._buildTokenHeader(token),
+          },
+        }
       );
 
       return response.data?.is_enrolled;
@@ -85,7 +108,8 @@ export class ApiInscriptionService implements InscriptionService {
 
   async deleteInscription(
     competitorId: string,
-    tournamentId: string
+    tournamentId: string,
+    token: string
   ): Promise<string> {
     try {
       const response = await this._httpClient.delete(
@@ -93,7 +117,12 @@ export class ApiInscriptionService implements InscriptionService {
           DELETE_TOURNAMENT_INSCRIPTION.replace(
             ":competitorId",
             competitorId
-          ).replace(":tournamentId", tournamentId)
+          ).replace(":tournamentId", tournamentId),
+        {
+          headers: {
+            ...this._buildTokenHeader(token),
+          },
+        }
       );
 
       return response.data?.message as string;
@@ -108,7 +137,8 @@ export class ApiInscriptionService implements InscriptionService {
   async enrollToTournament(
     competitorId: string,
     tournamentId: string,
-    pokemonShowdownExportTeam: string
+    pokemonShowdownExportTeam: string,
+    token: string
   ): Promise<{ inscription: TournamentInscription; message: string }> {
     try {
       const response = await this._httpClient.post(
@@ -117,6 +147,11 @@ export class ApiInscriptionService implements InscriptionService {
         {
           competitor_id: competitorId,
           pokemon_showdown_team_export: pokemonShowdownExportTeam,
+        },
+        {
+          headers: {
+            ...this._buildTokenHeader(token),
+          },
         }
       );
 
@@ -136,7 +171,8 @@ export class ApiInscriptionService implements InscriptionService {
 
   async updateInscription(
     inscriptionId: string,
-    pokemonShowdownExportTeam: string
+    pokemonShowdownExportTeam: string,
+    token: string
   ): Promise<{ inscription: TournamentInscription; message: string }> {
     try {
       const response = await this._httpClient.patch(
@@ -147,6 +183,11 @@ export class ApiInscriptionService implements InscriptionService {
           ),
         {
           pokemon_showdown_team_export: pokemonShowdownExportTeam,
+        },
+        {
+          headers: {
+            ...this._buildTokenHeader(token),
+          },
         }
       );
 

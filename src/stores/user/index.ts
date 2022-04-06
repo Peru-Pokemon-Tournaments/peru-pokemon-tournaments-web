@@ -15,6 +15,9 @@ export const useUserStore = defineStore("user", {
     };
   },
   getters: {
+    authToken(): string {
+      return this.token as string;
+    },
     isRegisterUserSuccessfully(): boolean {
       return this.registerUserSuccessful;
     },
@@ -118,7 +121,8 @@ export const useUserStore = defineStore("user", {
         this.enrolledToSelectedTournament =
           await this.inscriptionService.isCompetitorEnrolled(
             this.user!.competitor.id,
-            tournamentId
+            tournamentId,
+            this.authToken
           );
       } catch (error: any | ResponseError) {
         toast.error(error.message);

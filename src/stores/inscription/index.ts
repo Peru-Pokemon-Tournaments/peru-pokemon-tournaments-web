@@ -47,7 +47,8 @@ export const useInscriptionStore = defineStore("inscription", {
       try {
         this.inscription = await this.inscriptionService.getInscription(
           userStore.loggedUser!.competitor.id,
-          tournamentStore.selectedTournament!.tournament.id
+          tournamentStore.selectedTournament!.tournament.id,
+          userStore.authToken
         );
       } catch (error: any | ResponseError) {
         toast.error(error.message);
@@ -70,7 +71,8 @@ export const useInscriptionStore = defineStore("inscription", {
           await this.inscriptionService.enrollToTournament(
             userStore.loggedUser!.competitor.id,
             tournamentStore.selectedTournament!.tournament.id,
-            team
+            team,
+            userStore.authToken
           );
 
         this.inscription = inscription;
@@ -83,7 +85,9 @@ export const useInscriptionStore = defineStore("inscription", {
       }
     },
     async updateInscription(team: string): Promise<void> {
-      if (!this.hasInscription) {
+      const userStore = useUserStore();
+
+      if (!this.hasInscription || !userStore.isLoggedIn) {
         return;
       }
 
@@ -93,7 +97,8 @@ export const useInscriptionStore = defineStore("inscription", {
         const { inscription, message } =
           await this.inscriptionService.updateInscription(
             this.inscription!.id,
-            team
+            team,
+            userStore.authToken
           );
 
         this.inscription = inscription;
@@ -116,7 +121,8 @@ export const useInscriptionStore = defineStore("inscription", {
       try {
         const message = await this.inscriptionService.deleteInscription(
           userStore.loggedUser!.competitor.id,
-          tournamentStore.selectedTournament!.tournament.id
+          tournamentStore.selectedTournament!.tournament.id,
+          userStore.authToken
         );
 
         this.inscription = null;
