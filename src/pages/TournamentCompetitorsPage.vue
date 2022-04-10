@@ -5,7 +5,7 @@
     </template>
     <base-card v-if="!isLoadingCompetitors" id="competitors-card">
       <the-tournament-competitors-table
-        :title="'Es un torneo de prueba'"
+        :title="selectedTournament.tournament.title"
         :competitors="selectedTournamentCompetitors"
       />
       <footer>
@@ -44,6 +44,7 @@ export default defineComponent({
     ...mapState(useTournamentStore, [
       "selectedTournamentCompetitors",
       "isLoadingCompetitors",
+      "selectedTournament",
     ]),
   },
   methods: {
