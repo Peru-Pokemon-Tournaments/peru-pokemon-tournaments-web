@@ -32,6 +32,7 @@ export default defineComponent({
 #tournaments {
   box-sizing: border-box;
   width: 100%;
+  min-height: calc(100vh - 11.5rem);
 
   > li {
     width: fit-content;
