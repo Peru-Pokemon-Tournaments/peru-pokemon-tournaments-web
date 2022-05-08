@@ -15,6 +15,7 @@
         <footer>
           <base-button> Iniciar sesión </base-button>
           <router-link to="/register">Registrarse</router-link>
+          <router-link to="/forget-password">Olvidé mi contraseña</router-link>
         </footer>
       </form>
     </base-card>
