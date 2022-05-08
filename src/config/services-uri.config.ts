@@ -16,3 +16,5 @@ export const DELETE_TOURNAMENT_INSCRIPTION: string =
   "/api/tournaments/:tournamentId/competitors/:competitorId/inscription";
 export const UPDATE_TOURNAMENT_INSCRIPTION: string =
   "/api/inscriptions/:inscriptionId";
+export const RESET_PASSWORD: string = "/api/users/password/reset";
+export const UPDATE_PASSWORD: string = "/api/users/password";
