@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory, Router } from "vue-router";
+import ForgetPasswordPage from "../pages/ForgetPasswordPage.vue";
 import HomePage from "../pages/HomePage.vue";
 import LoginPage from "../pages/LoginPage.vue";
 import RegisterPage from "../pages/RegisterPage.vue";
+import ResetPasswordPage from "../pages/ResetPasswordPage.vue";
 import TournamentPage from "../pages/TournamentPage.vue";
 import TournamentCompetitorsPage from "../pages/TournamentCompetitorsPage.vue";
 import TournamentInscriptionPage from "../pages/TournamentInscriptionPage.vue";
@@ -24,6 +26,16 @@ const AppRouter: Router = createRouter({
       name: "Register",
       path: "/register",
       component: RegisterPage,
+    },
+    {
+      name: "ForgetPassword",
+      path: "/forget-password",
+      component: ForgetPasswordPage,
+    },
+    {
+      name: "ResetPassword",
+      path: "/reset-password",
+      component: ResetPasswordPage,
     },
     {
       name: "Tournament",
