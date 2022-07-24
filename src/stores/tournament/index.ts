@@ -4,6 +4,7 @@ import { ResponseError } from "@/services/interfaces/reponse-error";
 import { Tournament } from "@/models/tournament.model";
 import { CompleteTournament } from "@/models/complete-tournament.model";
 import { Competitor } from "@/models/competitor.model";
+import { TournamentResult } from "@/models/tournament-result.model";
 
 const toast = useToast();
 
@@ -13,7 +14,9 @@ export const useTournamentStore = defineStore("tournament", {
       tournaments: [] as Tournament[],
       tournament: null as CompleteTournament | null,
       competitors: [] as Competitor[],
+      results: [] as TournamentResult[],
       loadingCompetitors: false as boolean,
+      loadingResults: false as boolean,
     };
   },
   getters: {
@@ -26,14 +29,23 @@ export const useTournamentStore = defineStore("tournament", {
     selectedTournamentCompetitors(): Competitor[] {
       return this.competitors as Competitor[];
     },
+    selectedTournamentResults(): TournamentResult[] {
+      return this.results as TournamentResult[];
+    },
     hasSelectedTournament(): boolean {
       return this.tournament !== null;
     },
     hasSelectedTournamentCompetitors(): boolean {
       return this.competitors.length !== 0;
     },
+    hasSelectedTournamentResults(): boolean {
+      return this.results.length !== 0;
+    },
     isLoadingCompetitors(): boolean {
       return this.loadingCompetitors;
+    },
+    isLoadingTournamentResults(): boolean {
+      return this.loadingResults;
     },
   },
   actions: {
@@ -68,6 +80,19 @@ export const useTournamentStore = defineStore("tournament", {
         toast.error(error.message);
       } finally {
         this.loadingCompetitors = false;
+      }
+    },
+
+    async loadTournamentResults(tournamentId: string): Promise<void> {
+      this.loadingResults = true;
+      try {
+        this.results = await this.tournamentService.getResultsInTournament(
+          tournamentId
+        );
+      } catch (error: any | ResponseError) {
+        toast.error(error.message);
+      } finally {
+        this.loadingResults = false;
       }
     },
   },

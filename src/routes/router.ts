@@ -6,6 +6,7 @@ import RegisterPage from "../pages/RegisterPage.vue";
 import ResetPasswordPage from "../pages/ResetPasswordPage.vue";
 import TournamentPage from "../pages/TournamentPage.vue";
 import TournamentCompetitorsPage from "../pages/TournamentCompetitorsPage.vue";
+import TournamentResultsPage from "../pages/TournamentResultsPage.vue";
 import TournamentInscriptionPage from "../pages/TournamentInscriptionPage.vue";
 import TournamentInscriptionEditPage from "../pages/TournamentInscriptionEditPage.vue";
 
@@ -48,6 +49,12 @@ const AppRouter: Router = createRouter({
       path: "/tournaments/:tournamentId/competitors",
       props: true,
       component: TournamentCompetitorsPage,
+    },
+    {
+      name: "TournamentResults",
+      path: "/tournaments/:tournamentId/results",
+      props: true,
+      component: TournamentResultsPage,
     },
     {
       name: "TournamentInscription",
