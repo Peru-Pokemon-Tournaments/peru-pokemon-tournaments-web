@@ -26,7 +26,14 @@
           {{ result.tournamentInscription?.competitor?.nickName }}
         </td>
         <td>
-          <a :href="result.certificateUrl" target="_blank">Ver</a>
+          <a
+            v-if="result.hasCertificate"
+            :href="result.certificateUrl"
+            target="_blank"
+          >
+            Ver
+          </a>
+          '-'
         </td>
       </tr>
     </tbody>
