@@ -3,22 +3,24 @@
     Lista de participantes para el torneo: {{ title }}
   </base-title>
   <hr />
-  <table>
-    <thead>
-      <th>Nombres y Apellidos</th>
-      <th>Nickname</th>
-    </thead>
-    <tbody>
-      <tr v-for="competitor of competitors" :key="competitor.id">
-        <td>
-          {{ competitor.fullName }}
-        </td>
-        <td class="nickname">
-          {{ competitor.nickName }}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div id="table-container">
+    <table>
+      <thead>
+        <th>Nombres y Apellidos</th>
+        <th>Nickname</th>
+      </thead>
+      <tbody>
+        <tr v-for="competitor of competitors" :key="competitor.id">
+          <td>
+            {{ competitor.fullName }}
+          </td>
+          <td class="nickname">
+            {{ competitor.nickName }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 <script lang="ts">
 import { Competitor } from "@/models/competitor.model";
@@ -37,6 +39,11 @@ export default defineComponent({
 });
 </script>
 <style lang="scss" scoped>
+#table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
 table {
   width: 100%;
 
