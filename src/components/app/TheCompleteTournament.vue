@@ -86,6 +86,11 @@
               Eliminar mi inscripción
             </base-button>
           </li>
+          <li v-if="showResults">
+            <router-link :to="`/tournaments/${tournament.id}/results`">
+              <base-button>Resultados</base-button>
+            </router-link>
+          </li>
         </ul>
       </section>
     </base-card>
@@ -181,6 +186,9 @@ export default defineComponent({
         !this.tournament.isStarted &&
         !this.tournament.isEnded
       );
+    },
+    showResults() {
+      return this.tournament.isEnded;
     },
   },
   methods: {
