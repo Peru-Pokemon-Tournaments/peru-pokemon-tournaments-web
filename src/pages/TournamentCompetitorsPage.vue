@@ -5,9 +5,13 @@
     </template>
     <base-card v-if="!isLoadingCompetitors" id="competitors-card">
       <the-tournament-competitors-table
-        :title="selectedTournament.tournament.title"
+        :title="selectedTournamentTitle"
         :competitors="selectedTournamentCompetitors"
+        v-if="hasSelectedTournamentCompetitors"
       />
+      <span v-else id="not-found"
+        >No existen participantes para este torneo</span
+      >
       <footer>
         <router-link :to="`/tournaments/${tournamentId}`">
           <base-button>Ir a detalles del torneo</base-button>
@@ -42,16 +46,32 @@ export default defineComponent({
   },
   computed: {
     ...mapState(useTournamentStore, [
+      "hasSelectedTournament",
+      "hasSelectedTournamentCompetitors",
       "selectedTournamentCompetitors",
       "isLoadingCompetitors",
       "selectedTournament",
     ]),
+    selectedTournamentTitle(): string {
+      if (this.hasSelectedTournament) {
+        return this.selectedTournament!.tournament!.title;
+      }
+
+      return "-";
+    },
   },
   methods: {
-    ...mapActions(useTournamentStore, ["loadTournamentCompetitors"]),
+    ...mapActions(useTournamentStore, [
+      "loadTournamentCompetitors",
+      "loadTournament",
+    ]),
   },
   mounted(): void {
     this.loadTournamentCompetitors(this.tournamentId);
+
+    if (!this.hasSelectedTournament) {
+      this.loadTournament(this.tournamentId);
+    }
   },
 });
 </script>
@@ -73,6 +93,12 @@ export default defineComponent({
         text-decoration: none;
       }
     }
+  }
+
+  #not-found {
+    text-align: center;
+    width: 100%;
+    display: block;
   }
 
   #center {
