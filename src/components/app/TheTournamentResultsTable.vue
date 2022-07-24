@@ -33,7 +33,7 @@
           >
             Ver
           </a>
-          -
+          <span v-else>-</span>
         </td>
       </tr>
     </tbody>
