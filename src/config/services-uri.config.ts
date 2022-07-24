@@ -12,6 +12,10 @@ export const GET_COMPETITORS_IN_TOURNAMENT: string =
   "/api/tournaments/:tournamentId/inscriptions";
 export const GET_TOURNAMENT_INSCRIPTION: string =
   "/api/tournaments/:tournamentId/competitors/:competitorId/inscription";
+export const GET_TOURNAMENT_RESULTS: string =
+  "/api/tournaments/:tournamentId/results";
+export const GET_TOURNAMENT_RESULT_CERTIFICATE: string =
+  "/api/tournament-results/:tournamentResultId/certificate";
 export const DELETE_TOURNAMENT_INSCRIPTION: string =
   "/api/tournaments/:tournamentId/competitors/:competitorId/inscription";
 export const UPDATE_TOURNAMENT_INSCRIPTION: string =
