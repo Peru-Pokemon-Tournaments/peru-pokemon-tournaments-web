@@ -12,4 +12,8 @@ export class PokemonShowdownTeam {
   public static fromJson(json: any): PokemonShowdownTeam {
     return new PokemonShowdownTeam(json["id"], json["team"]);
   }
+
+  public get isTeamValid(): boolean {
+    return this._team != null && this.team.split("\r\n\r\n").length === 6;
+  }
 }

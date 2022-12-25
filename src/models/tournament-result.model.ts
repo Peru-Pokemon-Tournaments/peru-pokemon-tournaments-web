@@ -34,7 +34,10 @@ export class TournamentResult {
   }
 
   public get hasCertificate(): boolean {
-    return this._place <= 3;
+    return (
+      this._tournamentInscription != null &&
+      this._tournamentInscription.pokemonShowdownTeam.isTeamValid
+    );
   }
 
   public get certificateUrl(): string | null {
