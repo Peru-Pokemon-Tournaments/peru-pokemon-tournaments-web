@@ -14,6 +14,10 @@ export class PokemonShowdownTeam {
   }
 
   public get isTeamValid(): boolean {
-    return this._team != null && this.team.split("\r\n\r\n").length === 6;
+    return (
+      this._team != null &&
+      (this.team.split("\r\n\r\n").length === 6 ||
+        this.team.split("\n\n").length === 6)
+    );
   }
 }
